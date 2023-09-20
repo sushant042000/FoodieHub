@@ -1,24 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillDelete, AiOutlinePlusCircle } from "react-icons/ai";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { removeFromCart } from "../Redux/Slices/CartSlice";
+import {
+  decrementQty,
+  increamentQty,
+  removeFromCart,
+} from "../Redux/Slices/CartSlice";
+import { toast } from "react-toastify";
+
 
 const CartItem = ({ item }) => {
-  let [itemCount, setItemCount] = useState(1);
-
   const dispatch = useDispatch();
   const removeItemFromCart = () => {
     dispatch(removeFromCart(item));
+    toast.success(`${item.name} removed`,{icon:"✔❤"});
   };
+
   return (
     <div className="flex gap-6 shadow-md mt-3 h-20">
       <img src={item.img} alt="" className="w-[50px] h-[50px]" />
       <div className="gap-6 leading-4">
-        <div className="flex justify-between items-center gap-10 ">
+        <div className="flex justify-around items-center gap-6  ">
           <h2>{item.name}</h2>
           <AiFillDelete
-            className="hover:text-red-600 cursor-pointer font-medium"
+            className="hover:text-red-600 cursor-pointer text-[15px]"
             onClick={removeItemFromCart}
           />
         </div>
@@ -28,14 +34,14 @@ const CartItem = ({ item }) => {
             <AiOutlinePlusCircle
               className="  text-xl hover:bg-gray-600 overflow-hidden rounded-lg hover:text-white cursor-pointer transition-all ease-linear"
               onClick={() => {
-                setItemCount((itemCount += 1));
+                dispatch(increamentQty(item));
               }}
             />
-            <span>{itemCount}</span>
+            <span>{item.qty}</span>
             <AiOutlineMinusCircle
               className="  text-xl hover:bg-gray-600 overflow-hidden rounded-lg hover:text-white cursor-pointer"
               onClick={() => {
-                if (itemCount > 1) setItemCount((itemCount -= 1));
+                dispatch(decrementQty(item));
               }}
             />
           </div>

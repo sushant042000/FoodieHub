@@ -2,11 +2,14 @@ import React from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Redux/Slices/CartSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FoodItem = ({ item }) => {
+ 
   const dispatch = useDispatch();
   const handleAddToCart = () => {
-    dispatch(addToCart(item));
+    dispatch(addToCart({ ...item, qty: 1 }), toast(`${item.name} added to cart`));
   };
   return (
     <div className=" w-[250px] p-5 bg-white flex flex-col gap-2 rounded-lg">
