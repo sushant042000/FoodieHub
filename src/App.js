@@ -3,6 +3,7 @@ import Home from "./Pages/Home";
 import Success from "./Pages/Success";
 import Error from "./Pages/Error";
 import { ToastContainer } from "react-toastify";
+import ProtectedRoute from "./Components/Protected";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/success" element={<Success />} />
+          <Route path="/success" element={<ProtectedRoute component={<Success/>}/>} />
           <Route path="/*" element={<Error />} />
         </Routes>
       </BrowserRouter>

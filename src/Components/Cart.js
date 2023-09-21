@@ -3,16 +3,18 @@ import { AiOutlineClose } from "react-icons/ai";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
 import { FaShoppingCart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const [cartActive, setCartActive] = useState(false);
   const { cartItems } = useSelector((state) => state.cart);
   // const [totalAmount, setTotalAmount] = useState(0);
   const cartItemsCount = cartItems.length;
-  const totalAmount= cartItems.reduce((acc,cItem)=>{
-    return acc+=cItem.price*cItem.qty;
-  },0)
-  
+  const totalAmount = cartItems.reduce((acc, cItem) => {
+    return (acc += cItem.price * cItem.qty);
+  }, 0);
+
   return (
     <>
       <div
@@ -31,7 +33,7 @@ const Cart = () => {
         </div>
 
         {cartItems.length ? (
-          cartItems.map((item) => <CartItem key={item.id} item={item}  />)
+          cartItems.map((item) => <CartItem key={item.id} item={item} />)
         ) : (
           <h2 className="text-center text-gray-500 mt-5">Your cart is empty</h2>
         )}
@@ -44,15 +46,23 @@ const Cart = () => {
             Total Amount :{totalAmount}
           </h3>
           <hr className="w-[90vw] lg:[18vw] py-2" />
-          <button className="bg-green-500   mb-2 lg:mb-5 w-[90vw] p-2 rounded-lg hover:bg-green-600  lg:w-[18vw]">
+          <button
+            className="bg-green-500   mb-2 lg:mb-5 w-[90vw] p-2 rounded-lg hover:bg-green-600  lg:w-[18vw]"
+            onClick={() => navigate("/success")}
+          >
             Chekout
           </button>
         </div>
       </div>
       <FaShoppingCart
-        className="text-5xl fixed  right-10 bottom-10 cursor-pointer "
+        className="text-5xl fixed  right-10 bottom-10 cursor-pointer hover:scale-110 cursor-grab transition-all duration-500 "
         onClick={() => setCartActive(true)}
       />
+      {cartItems.length ? (
+        <div className="fixed bg-red-600 h-5 w-5 right-6 bottom-20 rounded-lg justify-center items-center">
+          <p className="flex justify-center items-center">{cartItemsCount}</p>
+        </div>
+      ) : null}
     </>
   );
 };

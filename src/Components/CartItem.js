@@ -14,17 +14,17 @@ const CartItem = ({ item }) => {
   const dispatch = useDispatch();
   const removeItemFromCart = () => {
     dispatch(removeFromCart(item));
-    toast.success(`${item.name} removed`,{icon:"✔❤"});
+    toast.success(`${item.name} removed`,{icon:"✔"});
   };
 
   return (
-    <div className="flex gap-6 shadow-md mt-3 h-20">
+    <div className="flex gap-6 shadow-md mt-3 h-18">
       <img src={item.img} alt="" className="w-[50px] h-[50px]" />
       <div className="gap-6 leading-4">
-        <div className="flex justify-around items-center gap-6  ">
-          <h2>{item.name}</h2>
+        <div className="flex justify-between items-center gap-6  ">
+          <h2 className="flex w-[80%]">{item.name}</h2>
           <AiFillDelete
-            className="hover:text-red-600 cursor-pointer text-[15px]"
+            className="hover:text-red-600 cursor-pointer text-[15px] w[20%]"
             onClick={removeItemFromCart}
           />
         </div>

@@ -17,7 +17,7 @@ const Navbar = () => {
           name="search"
           id=""
           placeholder="search here"
-          className="text-sm font-normal lg:rounded text-gray-800 p-3 border-gray-800  w-full lg:w-[25vw]"
+          className="text-sm font-normal  lg:rounded text-gray-800 p-3 border-gray-800  w-full lg:w-[25vw]"
          onChange={(e)=>dispatch(setSearch(e.target.value))}></input>
       </div>
     </nav>
