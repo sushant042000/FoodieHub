@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
